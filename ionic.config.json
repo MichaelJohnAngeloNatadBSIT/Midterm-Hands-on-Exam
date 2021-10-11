@@ -1,0 +1,7 @@
+{
+  "name": "Midterm-App-Natad-BSIT-3",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
