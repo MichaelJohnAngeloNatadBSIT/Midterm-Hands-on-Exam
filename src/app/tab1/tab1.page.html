@@ -30,12 +30,22 @@
   <ion-content>
     <ion-list>
       <ion-item>
-        <ion-menu-button color="primary">test</ion-menu-button>
+        <ion-menu-button color="primary" [routerLink]="['/login']"><ion-icon name="log-in-outline"></ion-icon></ion-menu-button>
+        <ion-label>Login</ion-label>
       </ion-item>
-      <ion-item>Menu Item</ion-item>
-      <ion-item>Menu Item</ion-item>
-      <ion-item>Menu Item</ion-item>
-      <ion-item>Menu Item</ion-item>
+      <ion-item>
+        <ion-menu-button color="secondary" [routerLink]="['/signup']">
+          <ion-icon name="person-add-outline"></ion-icon>
+        </ion-menu-button>
+        <ion-label>Sign Up</ion-label>
+      </ion-item>
+      <ion-item>
+          <ion-menu-button color="secondary" [routerLink]="['/about']">
+            <ion-icon name="information-circle-outline">
+          </ion-icon>
+        </ion-menu-button>
+        <ion-label>About</ion-label>
+      </ion-item>
     </ion-list>
   </ion-content>
 </ion-menu>
