@@ -1,17 +1,56 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 3
+      Profile
     </ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-content fullscreen="true" slot="fixed">
+  <div class="ion-padding">
+    <div class="card">
+      <div class="header">
+        <div class="avatar">
+          <ion-thumbnail>
+            <img src="assets/img/satoru.png" alt="profile-pic" class="profile-pic">
+          </ion-thumbnail>
+         
+        </div>
+       
+        <div class="card-body">
+          <div class="user-meta ion-text-center">
+            <h3 class="name">Satoru Fujinuma</h3>
+            <h5 class="country">Japan</h5>
+            <ion-chip color="primary">
+              <ion-label>Pizza Guy</ion-label>
+            </ion-chip>
+            <ion-chip color="success">
+              <ion-label>Revival</ion-label>
+            </ion-chip>
+            <ion-chip color="tertiary">
+              <ion-label>Mangaka</ion-label>
+            </ion-chip>
+            <ion-chip color="danger">
+              <ion-label>Enjoy prison life Yashiro</ion-label>
+            </ion-chip>  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <ion-card>
+    <h1>Your Favorite Animes</h1>
+    <ion-slides>
+      <ion-slide *ngFor="let favorite of favoriteAnimes"  (click)='itemSelected(favorite)'>
+        <div class="slide">
+          <img src="{{favorite.poster}}" class="img-poster"/>
+          <h2>Title: <b>{{favorite.title}}</b></h2>
+          <p>Comment: <b>{{favorite.comment}}</b></p>
+          <h3>Rating: <b>{{favorite.rating}}</b></h3>
+        </div>
+      </ion-slide>
+    </ion-slides>
+  </ion-card>
+
 </ion-content>

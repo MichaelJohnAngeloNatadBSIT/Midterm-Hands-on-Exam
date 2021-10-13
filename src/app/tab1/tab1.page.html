@@ -1,17 +1,138 @@
+
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Animes
     </ion-title>
   </ion-toolbar>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="selectTabs">
+      <ion-segment-button value="favorites">
+        <ion-label>Favorites</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="top-anime">
+        <ion-label>Top Animes</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar placeholder="Search Anime"></ion-searchbar>
+  </ion-toolbar>
 </ion-header>
+
+
+<ion-menu side="start" menuId="custom" contentId="main" class="my-custom-menu">
+  <ion-header>
+    <ion-toolbar color="tertiary">
+      <ion-title>Custom Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item>
+        <ion-menu-button color="primary">test</ion-menu-button>
+      </ion-item>
+      <ion-item>Menu Item</ion-item>
+      <ion-item>Menu Item</ion-item>
+      <ion-item>Menu Item</ion-item>
+      <ion-item>Menu Item</ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+
+<ion-router-outlet id="main"></ion-router-outlet>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+      <ion-title size="large">Animes</ion-title>
     </ion-toolbar>
   </ion-header>
+  <div *ngIf="selectTabs == 'favorites'">
+  <ion-grid>
+    <ion-row *ngFor="let anime of animes"  (click)='itemSelected(anime)'>
+      <ion-col size-lg="2" size-md="2" size-sm="2"></ion-col>
+      <ion-col size-lg="8" size-md="8" size-sm="8">
+      <ion-list>
+      <ion-item>
+      <ion-card>
+          <img src="{{anime.poster}}" class="rand-img"/>
+            <ion-card-header>
+              <ion-card-subtitle>{{anime.posterTitle}}</ion-card-subtitle>
+              <ion-card-title>{{anime.title}}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              {{anime.synopsis}}
+              <br/>
+              <rating [rate]="rate"
+                readonly="false" 
+                size="default" 
+                (ngModelChange)="onModelChange(handleButtonClick)">
+              </rating>
+              <ion-button color="primary"><ion-icon name="chatbox-outline"></ion-icon></ion-button>
+              <ion-button style="--background:pink"><ion-icon name="heart-outline"></ion-icon></ion-button>
+              <ion-button color="secondary"><ion-icon name="share-social-outline"></ion-icon></ion-button>
+            </ion-card-content>
+      </ion-card>
+    </ion-item>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  
+    </ion-list>
+    </ion-col>
+      <ion-col size-lg="2" size-md="2" size-sm="2"></ion-col>
+    </ion-row>
+  </ion-grid>
+</div>
+
+
+<div *ngIf="selectTabs == 'top-anime'">
+  <ion-row *ngFor="let topAnime of topAnimes"  (click)='itemSelected(topAnime)'>
+    <ion-col size-lg="2" size-md="2" size-sm="2"></ion-col>
+    <ion-col size-lg="8" size-md="8" size-sm="8">
+
+      <ion-card>
+        <img src="{{topAnime.poster}}" class="rand-img"/>
+          <ion-card-header>
+            <ion-card-subtitle>{{topAnime.posterTitle}}</ion-card-subtitle>
+            <ion-card-title>{{topAnime.title}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            {{topAnime.synopsis}}
+            <br/>
+            <rating [rate]="rate"
+              readonly="false" 
+              size="default" 
+              (ngModelChange)="onModelChange(handleButtonClick)">
+            </rating>
+            <ion-button color="primary"><ion-icon name="chatbox-outline"></ion-icon></ion-button>
+            <ion-button style="--background:pink"><ion-icon name="heart-outline"></ion-icon></ion-button>
+            <ion-button color="secondary"><ion-icon name="share-social-outline"></ion-icon></ion-button>
+          </ion-card-content>
+    </ion-card>
+
+  </ion-col>
+    <ion-col size-lg="2" size-md="2" size-sm="2"></ion-col>
+  </ion-row>
+
+</div>
+
+
 </ion-content>
+<script>
+  const searchbar = document.querySelector('ion-searchbar');
+  const items = Array.from(document.querySelector('ion-card-title'));
+
+  searchbar.addEventListener('ionInput', handleInput);
+
+  function handleInput(event) {
+    const query = event.target.value.toLowerCase();
+    requestAnimationFrame(() => {
+      items.forEach(item => {
+        const shouldShow = item.textContent.toLowerCase().indexOf(query) > -1;
+        item.style.display = shouldShow ? 'block' : 'none';
+      });
+    });
+  }
+</script>
+
