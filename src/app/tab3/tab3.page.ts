@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-tab3',
@@ -6,6 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
+
+
+  
   favoriteAnimes = [
     {
       'poster' : 'assets/img/terror.jpg',
@@ -38,7 +43,16 @@ export class Tab3Page {
       'rating' : '8',
     },
   ]
-
-  constructor() {}
+  data:any;
+  constructor(
+    private activitedRoute:ActivatedRoute,
+  ) { 
+      this.data = this.activitedRoute.snapshot.paramMap.get('email')
+      // this.activitedRoute.paramMap.subscribe(
+      //   (data) => {
+      //     console.log(data)
+      //   }
+      // )
+  }
 
 }

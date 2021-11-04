@@ -7,8 +7,16 @@ const routes: Routes = [
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
-    path: 'tab3',
+    path: 'tab3/:email',
     loadChildren: () => import('./tab3/tab3.module').then(m => m.Tab3PageModule)
+  },
+  {
+    path: 'tab1/:email',
+    loadChildren: () => import('./tab1/tab1.module').then(m => m.Tab1PageModule)
+  },
+  {
+    path: 'tabs/tab3/:email',
+    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
     path: 'login',
